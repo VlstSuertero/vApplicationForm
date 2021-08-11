@@ -1,0 +1,117 @@
+<div class="container">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <h1>Angular Forms</h1>
+
+    <div class="form-control">
+      <label>Name</label>
+      <input type="text" placeholder="Name" formControlName="name">
+      <div
+        *ngIf="form.get('name')!.invalid && form.get('name')!.touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('name')!.errors!.required">
+          Field cannot be empty
+        </small>
+
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Last Name</label>
+      <input type="text" placeholder="Last Name" formControlName="lastName">
+      <div
+        *ngIf="form.get('lastName')!.invalid && form.get('lastName')!.touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('lastName')!.errors!.required">
+          Field cannot be empty
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label>Birthday</label>
+      <input type="date" placeholder="Birthday" formControlName="birthday">
+      <div
+        *ngIf="form.get('birthday')!.invalid && form.get('birthday')!.touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('birthday')!.errors!.required">
+          Field cannot be empty
+        </small>
+      </div>
+    </div>
+
+    <div class="card" formGroupName="tech">
+      <h2>Select technologies</h2>
+
+      <div class="form-control">
+        <label>Technology</label>
+
+        <select formControlName="mainTech" (change)="setTech()">
+          <option value="" disabled>Choose...</option>
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+        </select>
+      </div>
+
+      <div class="form-control" >
+        <label>Version</label>
+        <select formControlName="version">
+          <option value="" disabled>Choose...</option>
+          <option value="{{elem}}" *ngFor="let elem of v; let i = index">{{elem}}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-control">
+      <label>Email</label>
+      <input type="email" placeholder="Email" formControlName="email">
+      <div
+        *ngIf="form.get('email')!.invalid && form.get('email')!.touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('email')!.errors!.required">
+          Field cannot be empty
+        </small>
+
+        <small *ngIf="form.get('email')!.errors!.email">
+          Enter correct email
+        </small>
+
+        <small *ngIf="form.get('email')!.errors!.uniqEmail">
+          This email already exist
+        </small>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Hobbies</h2>
+      <button class="btn" type="button" (click)="addHobbies()">Add hobbies</button>
+
+       <div
+         class="form-control"
+         formArrayName="hobbies"
+          *ngFor="let hobby of hobbies.controls; let i = index"
+       >
+         <ng-container [formGroupName]="i">
+
+           <title>Hobby name</title>
+           <input type="text" class="hobby" formControlName="hobbiesName" />
+
+           <title>Duration</title>
+           <input type="date" class="hobby" formControlName="duration" />
+
+         </ng-container>
+       </div>
+    </div>
+
+    <button class="btn" type="submit" [disabled]="form!.invalid">Send</button>
+
+  </form>
+</div>
+
+

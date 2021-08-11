@@ -1,0 +1,22 @@
+p {
+  font-size: 1.5rem;
+}
+
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+  }
+
+
+}
+
+.hobby {
+  margin-top: 10px;
+  input {
+    margin-top: 5px;
+  }
+}
